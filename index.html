@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff5f7"><title>我们的恋爱｜一起完成100件小事</title>
+<style>
+:root{--pink:#c76e8d;--deep:#8e4965;--pale:#fff2f5;--bg:#fff9fa;--ink:#49343d;--muted:#9b818b;--line:#f1dce3;--green:#6e9b82}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fff3f6 0,#fffafb 300px,#fff 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink)}
+button,input,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:760px;margin:auto;padding:18px 16px 90px}
+.top{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 16px}.brand{font-weight:800;letter-spacing:.4px;color:var(--deep);font-size:20px}.brand span{color:var(--pink)}.small-btn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 12px;color:var(--deep);font-size:12px}
+.hero{background:linear-gradient(135deg,#fbe4eb,#fff1f4 65%,#f8e6ed);border:1px solid #f4dbe3;border-radius:25px;padding:22px 20px;box-shadow:0 10px 30px #b76c8510;position:relative;overflow:hidden}
+.hero:after{content:"♡";position:absolute;right:18px;top:4px;font-size:90px;color:#d98da51e;transform:rotate(12deg)}
+.eyebrow{font-size:12px;color:#a56d82;letter-spacing:2px}.hero h1{font-size:25px;line-height:1.35;margin:8px 0;color:#80445d}.hero p{font-size:13px;color:#9b7181;margin:0 0 20px}
+.progress-row{display:flex;align-items:end;justify-content:space-between}.progress-num{font-size:28px;font-weight:800;color:var(--deep)}.progress-num small{font-size:13px;font-weight:500;color:#a77e8e}.percent{font-size:12px;color:#a77e8e}.bar{height:9px;background:#efd5df;border-radius:20px;margin-top:9px;overflow:hidden}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#cf7e9a,#e7a7b9);border-radius:20px;transition:width .25s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 20px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}.stat b{display:block;font-size:18px;color:var(--deep)}.stat span{font-size:11px;color:var(--muted)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 12px}.section-head h2{font-size:17px;margin:0;color:#704255}.section-head small{color:var(--muted);font-size:11px}
+.tools{display:flex;gap:8px;margin-bottom:12px}.search{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 13px;background:#fff;outline:none;color:var(--ink)}.filter{border:1px solid var(--line);border-radius:13px;padding:0 10px;background:#fff;color:var(--deep);font-size:12px}
+.categories{display:flex;gap:7px;overflow:auto;padding:2px 0 10px;scrollbar-width:none}.categories button{white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:8px 12px;background:#fff;color:#946b7b;font-size:12px}.categories button.active{background:#c87894;color:white;border-color:#c87894}
+.list{display:grid;gap:9px}.task{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px 12px;box-shadow:0 3px 12px #9d5b7010}.task.done{background:#fff9fb;border-color:#ecd4dd}.check{width:24px;height:24px;border-radius:50%;border:1.5px solid #dfb5c4;background:#fff;color:white;display:grid;place-items:center;font-size:14px}.task.done .check{background:var(--pink);border-color:var(--pink)}.task-title{font-size:13px;line-height:1.5}.task.done .task-title{color:#ad929c;text-decoration:line-through}.task-meta{font-size:10px;color:#b59aa5;margin-top:3px}.edit{border:0;background:transparent;color:#bd8298;font-size:17px;padding:5px}
+.empty{text-align:center;color:var(--muted);font-size:13px;padding:30px}
+.footer{text-align:center;color:#b59aa5;font-size:11px;margin:24px 0 0}
+.modal{display:none;position:fixed;inset:0;background:#42232f66;z-index:5;align-items:end;justify-content:center;padding:12px}.modal.show{display:flex}.sheet{background:#fff;border-radius:22px 22px 16px 16px;width:min(100%,560px);padding:20px;max-height:88vh;overflow:auto}.sheet h3{margin:0 0 6px;color:var(--deep);font-size:18px}.sheet p{margin:0 0 15px;color:var(--muted);font-size:12px}.field{display:block;width:100%;border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0 12px;outline:none;background:#fff;color:var(--ink)}textarea.field{min-height:90px;resize:vertical}.actions{display:flex;gap:9px;margin-top:14px}.primary,.secondary{border:0;border-radius:12px;padding:12px 16px;font-weight:600}.primary{background:var(--pink);color:#fff;flex:1}.secondary{background:#f8edf1;color:var(--deep)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#563342;color:white;padding:10px 16px;border-radius:99px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:10}.toast.show{opacity:1}
+.syncbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:14px}.syncstatus{font-size:12px;color:var(--muted);line-height:1.6}.syncstatus strong{color:var(--deep)}.sync-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.sync-actions button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px;color:var(--deep);font-size:12px}
+@media(min-width:600px){.wrap{padding-top:26px}.modal{align-items:center}.sheet{border-radius:22px}.hero{padding:28px}.hero h1{font-size:30px}}
+</style>
+</head>
+<body><main class="wrap">
+  <header class="top"><div class="brand">我们的恋爱 <span>♥</span></div><button class="small-btn" id="settingsBtn">双人同步设置</button></header>
+  <section class="hero">
+    <div class="eyebrow">把每一天都过成纪念日</div>
+    <h1>一起完成100件小事</h1><p>把平凡的日子，变成值得珍藏的回忆。</p>
+    <div class="progress-row"><div class="progress-num"><span id="doneCount">0</span><small> / 100 件</small></div><div class="percent" id="percent">已完成 0%</div></div>
+    <div class="bar"><i id="progressBar"></i></div>
+  </section>
+  <section class="stats">
+    <div class="stat"><b id="remaining">100</b><span>待完成</span></div>
+    <div class="stat"><b id="streak">0</b><span>留下的回忆</span></div>
+    <div class="stat"><b id="categoryCount">6</b><span>主题分类</span></div>
+  </section>
+  <div class="section-head"><h2>我们的愿望清单</h2><small>完成后点亮一颗心 ♡</small></div>
+  <div class="tools"><input class="search" id="search" placeholder="搜索想做的小事…"><select class="filter" id="statusFilter"><option value="all">全部状态</option><option value="todo">未完成</option><option value="done">已完成</option></select></div>
+  <nav class="categories" id="categories"></nav>
+  <section class="list" id="taskList"></section>
+  <div class="syncbox"><div class="syncstatus" id="syncStatus"><strong>当前为本机模式</strong><br>在“双人同步设置”中连接 Firebase 后，两部手机加入同一个房间即可实时同步。也可以先在本机体验。</div>
+    <div class="sync-actions"><button id="exportBtn">导出进度备份</button><button id="importBtn">导入进度备份</button><input type="file" id="importFile" accept="application/json" hidden></div>
+  </div>
+  <div class="footer">愿你们把喜欢的日子，过成值得纪念的日子。 ♥</div>
+</main>
+<div class="modal" id="editModal"><div class="sheet"><h3 id="modalTitle">记录这件小事</h3><p id="modalSub">给这段回忆留下一点记录吧。</p><label>完成日期<input class="field" type="date" id="dateInput"></label><label>回忆备注<textarea class="field" id="noteInput" placeholder="当时去了哪里？发生了什么有趣的事？"></textarea></label><div class="actions"><button class="secondary" id="cancelEdit">取消</button><button class="primary" id="saveEdit">保存回忆</button></div></div></div>
+<div class="modal" id="syncModal"><div class="sheet"><h3>开启双人实时同步</h3><p>需要一个免费的 Firebase 项目。配置一次后，两部手机输入相同房间码即可共享打卡和回忆。</p>
+<label>Firebase 配置（可粘贴 JSON）<textarea class="field" id="firebaseConfig" placeholder='{"apiKey":"...","authDomain":"...","databaseURL":"https://...","projectId":"...","appId":"..."}'></textarea></label>
+<label>情侣房间码<input class="field" id="roomCode" placeholder="例如 LOVE2026（两部手机填写相同房间码）" maxlength="24"></label>
+<div class="syncstatus">配置步骤：① 在 Firebase Console 创建项目；② 添加 Web 应用并复制配置；③ 启用 Authentication 的匿名登录；④ 创建 Realtime Database；⑤ 将数据库规则设为仅登录用户可读写（示例见随附说明）。此版本通过匿名登录连接数据库。</div>
+<div class="actions"><button class="secondary" id="closeSync">稍后</button><button class="primary" id="connectSync">连接并同步</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const groups=[
+["日常陪伴",["一起看一次日出","一起看一次日落","一起在家做一顿饭","一起包一次饺子","一起做一次早餐","一起逛超市并给对方买零食","一起打扫房间、布置小窝","一起窝在沙发上看电影","一起追完一部电视剧","一起玩一晚上的桌游","一起拼一幅大型拼图","一起养一盆植物","一起给对方按摩","一起散步到很晚","一起在雨天听雨、聊天","一起拍一组日常生活照","一起给对方写一封信"]],
+["约会与浪漫",["一起去游乐园坐摩天轮","一起去电影院看一场电影","一起去海边吹风","一起去江边或湖边散步","一起看一场演唱会","一起去看一次音乐节","一起去花店挑花","一起拍一次情侣写真","一起穿情侣装出门","一起戴情侣饰品","一起过一个有仪式感的纪念日","一起庆祝对方的生日","一起在圣诞节交换礼物","一起倒数跨年","一起在星空下拥抱","一起去一次夜市","一起去一次露天电影"]],
+["美食与生活",["一起吃一顿火锅","一起吃一次日料","一起吃一次西餐","一起去吃对方最喜欢的美食","一起挑战一家网红餐厅","一起去吃路边摊","一起喝一次下午茶","一起做一次蛋糕","一起做一次巧克力","一起制作一顿烛光晚餐","一起去咖啡馆打卡","一起尝试从没吃过的食物","一起去采摘水果","一起吃一次自助餐","一起去农家乐体验生活","一起喝着饮料聊到深夜"]],
+["旅行与户外",["一起去一次短途旅行","一起计划一次跨省旅行","一起去海边看海","一起去山里看风景","一起去露营","一起在户外看星星","一起去爬一座山","一起去一次温泉","一起坐一次高铁去陌生城市","一起自驾游","一起去一个古镇","一起去一次动物园","一起去一次水族馆","一起去滑雪","一起去骑行","一起在陌生城市迷路后寻找目的地","一起住一次有特色的民宿"]],
+["共同成长",["一起学一项新技能","一起学跳一支舞","一起健身一个月","一起跑一次5公里","一起打一次羽毛球","一起去游泳","一起学做一道新菜","一起学一首双人合唱歌曲","一起玩一次密室逃脱","一起玩一次剧本杀","一起去陶艺馆做陶瓷","一起体验一次手工DIY","一起完成一次双人游戏挑战","一起制定一个共同的小目标","一起存一笔旅行基金","一起读同一本书并分享感受","一起做一次志愿者"]],
+["专属回忆与未来",["一起记录第一次见面的地方","一起重走第一次约会的路线","一起拍一张和初次见面相似的合照","一起录一段给未来彼此的视频","一起交换小时候的照片","一起分享彼此最难忘的童年故事","一起列出彼此的愿望清单","一起写下对未来生活的期待","一起讨论理想中的家","一起设计未来的小家","一起养一只宠物（条件允许时）","一起庆祝恋爱100天","一起庆祝恋爱一周年","一起制作一本年度回忆册","一起给未来的自己写一封信"]]
+];
+const tasks=[];groups.forEach(([category,items])=>items.forEach(title=>tasks.push({id:String(tasks.length+1),category,title})));
+if(tasks.length!==100) console.warn("清单数量",tasks.length);
+const KEY="our-love-v1";let state=JSON.parse(localStorage.getItem(KEY)||"{}");let active="全部";let editing=null;let db=null;let room="";let unsubscribe=null;let applyingRemote=false;let saveTimer;
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderStats();if(db&&!applyingRemote){clearTimeout(saveTimer);saveTimer=setTimeout(()=>set(ref(db,`rooms/${room}/state`),state).catch(e=>toast("同步失败："+e.message)),250)}}
+function renderStats(){let n=tasks.filter(t=>state[t.id]?.done).length;$("doneCount").textContent=n;$("remaining").textContent=100-n;$("streak").textContent=Object.values(state).filter(x=>x?.done&&x.note).length;$("percent").textContent=`已完成 ${n}%`;$("progressBar").style.width=n+"%"}
+function renderCategories(){let names=["全部",...groups.map(g=>g[0])];$("categories").innerHTML=names.map(n=>`<button class="${active===n?"active":""}" data-cat="${n}">${n}</button>`).join("");$("categories").querySelectorAll("button").forEach(b=>b.onclick=()=>{active=b.dataset.cat;renderCategories();renderTasks()})}
+function renderTasks(){let q=$("search").value.trim().toLowerCase(),filter=$("statusFilter").value;let filtered=tasks.filter(t=>(active==="全部"||t.category===active)&&(!q||(t.title+t.category).toLowerCase().includes(q))&&(filter==="all"||(filter==="done"?state[t.id]?.done:!state[t.id]?.done)));$("taskList").innerHTML=filtered.length?filtered.map(t=>{let s=state[t.id]||{};return `<article class="task ${s.done?"done":""}"><button class="check" data-check="${t.id}" aria-label="完成">${s.done?"♥":""}</button><div><div class="task-title">${t.id}. ${t.title}</div><div class="task-meta">${t.category}${s.date?" · "+s.date:""}${s.note?" · 已留下回忆":""}</div></div><button class="edit" data-edit="${t.id}" aria-label="编辑回忆">✎</button></article>`}).join(""):'<div class="empty">没有找到相关事项，换个关键词试试吧。</div>';$("taskList").querySelectorAll("[data-check]").forEach(b=>b.onclick=()=>toggle(b.dataset.check));$("taskList").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(b.dataset.edit))}
+function toggle(id){let s=state[id]||{};state[id]={...s,done:!s.done,date:!s.done?(s.date||new Date().toISOString().slice(0,10)):s.date};persist();renderTasks();toast(state[id].done?"又完成一件小事 ♥":"已取消完成")}
+function openEdit(id){editing=id;let t=tasks.find(x=>x.id===id),s=state[id]||{};$("modalTitle").textContent=t.title;$("modalSub").textContent=`第 ${id} 件 · ${t.category}`;$("dateInput").value=s.date||new Date().toISOString().slice(0,10);$("noteInput").value=s.note||"";$("editModal").classList.add("show")}
+function closeEdit(){$("editModal").classList.remove("show");editing=null}
+$("saveEdit").onclick=()=>{if(!editing)return;let s=state[editing]||{};state[editing]={...s,done:true,date:$("dateInput").value,note:$("noteInput").value.trim()};persist();renderTasks();closeEdit();toast("回忆已保存 ♥")};
+$("cancelEdit").onclick=closeEdit;
+$("search").oninput=renderTasks;$("statusFilter").onchange=renderTasks;
+function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2200)}
+$("settingsBtn").onclick=()=>$("syncModal").classList.add("show");$("closeSync").onclick=()=>$("syncModal").classList.remove("show");
+$("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify({version:1,state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="情侣打卡进度备份.json";a.click();URL.revokeObjectURL(a.href)};
+$("importBtn").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());state=d.state||d;persist();renderTasks();toast("备份导入成功")}catch{toast("文件格式不正确")}e.target.value=""};
+$("connectSync").onclick=async()=>{try{let cfg=JSON.parse($("firebaseConfig").value),r=$("roomCode").value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g,"");if(!cfg.apiKey||!cfg.databaseURL||!r)throw Error("请填写有效的 Firebase 配置和房间码");if(unsubscribe)unsubscribe();let app=initializeApp(cfg,"our-love-"+Date.now());let auth=getAuth(app);await signInAnonymously(auth);db=getDatabase(app);room=r;let roomRef=ref(db,`rooms/${room}/state`);let snap=await get(roomRef);if(!snap.exists())await set(roomRef,state);unsubscribe=onValue(roomRef,s=>{if(s.exists()){applyingRemote=true;state=s.val()||{};localStorage.setItem(KEY,JSON.stringify(state));renderStats();renderTasks();applyingRemote=false}});$("syncStatus").innerHTML=`<strong>♥ 已连接双人同步</strong><br>房间码：${room}。另一部手机使用相同 Firebase 配置和房间码即可加入。`;localStorage.setItem("our-love-firebase",JSON.stringify(cfg));localStorage.setItem("our-love-room",room);$("syncModal").classList.remove("show");toast("同步连接成功")}catch(e){toast("连接失败："+e.message)}};
+const savedCfg=localStorage.getItem("our-love-firebase"),savedRoom=localStorage.getItem("our-love-room");if(savedCfg){$("firebaseConfig").value=savedCfg;$("roomCode").value=savedRoom||""}
+renderCategories();renderStats();renderTasks();
+</script></body></html>
